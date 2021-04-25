@@ -1,8 +1,4 @@
-const getDetails = (...args: number[]): void => {
-  console.log(args);
+var double = (value: number): number => {
+  return value * 2;
 };
-
-getDetails(23, 23, 55, 222, 122);
-
-let [hobby1, hobby2] = ["games", "music"];
-console.log(hobby1);
+console.log(double(10));
