@@ -1,18 +1,8 @@
-type BankAccount = { money: number; deposit: (val: number) => void };
-
-let bankAccount: BankAccount = {
-  money: 2000,
-  deposit(value: number): void {
-    return this.money + value;
-  },
+const getDetails = (...args: number[]): void => {
+  console.log(args);
 };
 
-let myself: { name: string; bankAccount: BankAccount; hobbies: string[] } = {
-  name: "Max",
-  bankAccount: bankAccount,
-  hobbies: ["Sports", "Cooking"],
-};
+getDetails(23, 23, 55, 222, 122);
 
-myself.bankAccount.deposit(3000);
-
-console.log(myself);
+let [hobby1, hobby2] = ["games", "music"];
+console.log(hobby1);

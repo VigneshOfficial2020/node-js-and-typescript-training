@@ -1,13 +1,10 @@
-var bankAccount = {
-    money: 2000,
-    deposit: function (value) {
-        return this.money + value;
+var getDetails = function () {
+    var args = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        args[_i] = arguments[_i];
     }
+    console.log(args);
 };
-var myself = {
-    name: "Max",
-    bankAccount: bankAccount,
-    hobbies: ["Sports", "Cooking"]
-};
-myself.bankAccount.deposit(3000);
-console.log(myself);
+getDetails(23, 23, 55, 222, 122);
+var _a = ["games", "music"], hobby1 = _a[0], hobby2 = _a[1];
+console.log(hobby1);
