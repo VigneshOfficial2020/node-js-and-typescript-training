@@ -1,4 +1,9 @@
-var double = (value: number): number => {
-  return value * 2;
+// Exercise 2
+var greet = (name?: string): void => {
+  if (name === undefined) {
+    name = "Max";
+  }
+  console.log("Hello, " + name);
 };
-console.log(double(10));
+greet();
+greet("Anna");

@@ -1,4 +1,9 @@
-var double = function (value) {
-    return value * 2;
+// Exercise 2
+var greet = function (name) {
+    if (name === undefined) {
+        name = "Max";
+    }
+    console.log("Hello, " + name);
 };
-console.log(double(10));
+greet();
+greet("Anna");
