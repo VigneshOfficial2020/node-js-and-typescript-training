@@ -1,16 +1,17 @@
-const request: any = require("request");
+const geocode = require("./utils/globalDetails");
+const geocodeSingle = require("./utils/globalSingleDetails");
+const url = "https://jsonplaceholder.typicode.com/posts";
 
-const reqUrl = "https://jsonplaceholder.typicode.com/posts";
-
-request({ url: reqUrl, json: true }, (error: any, data: any) => {
-  try {
-    if (error) {
-      console.log("error = ", error);
-      return;
-    }
-    let finaDetails = data.body;
-    console.log("finaDetails = ", finaDetails[0]);
-  } catch (error1) {
-    console.log("error = ", error1);
-  }
-});
+if (!url) {
+  console.log("Please provide an address");
+} else {
+  console.log("calling from geocode api");
+  geocode(url, (error: any, data: any) => {
+    console.log("calling from geocode api");
+    let id = data[0]["id"];
+    console.log("final Id", id);
+    geocodeSingle(`${url}/${id}`, (error: any, data: any) => {
+      console.log("geocodeSingle", data);
+    });
+  });
+}
