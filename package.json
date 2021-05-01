@@ -1,0 +1,24 @@
+{
+  "name": "js-and-typescript-training",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tutorial.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon dist/tutorial.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VigneshOfficial2020/node-js-and-typescript-training.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VigneshOfficial2020/node-js-and-typescript-training/issues"
+  },
+  "homepage": "https://github.com/VigneshOfficial2020/node-js-and-typescript-training#readme",
+  "dependencies": {
+    "@types/node": "^15.0.1",
+    "nodemon": "^2.0.7"
+  }
+}
