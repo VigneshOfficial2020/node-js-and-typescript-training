@@ -1,10 +1,12 @@
 import { RequestHandler } from "express";
 import Todo from "../models/todos";
+const logger = require("../logger");
 
 const TODOS: Todo[] = [];
 
 export const createTodo: RequestHandler = (req, res, next) => {
   try {
+    logger.info("Inside createTodo API");
     const text = req.body.text;
     const newTodo = new Todo(Math.random().toString(), text);
     TODOS.push(newTodo);
@@ -13,6 +15,7 @@ export const createTodo: RequestHandler = (req, res, next) => {
       result: 1,
     });
   } catch (err) {
+    logger.console.error("error in createTodo API", err);
     res.status(500).json({
       message: "Internal server error while creating.Please contact admin",
     });

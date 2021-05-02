@@ -5,9 +5,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateTodo = exports.getTodos = exports.createTodo = void 0;
 const todos_1 = __importDefault(require("../models/todos"));
+const logger = require("../logger");
 const TODOS = [];
 const createTodo = (req, res, next) => {
     try {
+        logger.info("Inside createTodo API");
         const text = req.body.text;
         const newTodo = new todos_1.default(Math.random().toString(), text);
         TODOS.push(newTodo);
@@ -17,6 +19,7 @@ const createTodo = (req, res, next) => {
         });
     }
     catch (err) {
+        logger.console.error("error in createTodo API", err);
         res.status(500).json({
             message: "Internal server error while creating.Please contact admin",
         });
