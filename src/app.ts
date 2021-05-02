@@ -1,8 +1,12 @@
 import express, { Request, Response, NextFunction } from "express";
 import todoRoutes from "./routes/todos";
 import { json } from "body-parser";
+const path = require("path");
 
 const app = express();
+
+const publicDirectoryPath = path.join(__dirname, "../public");
+app.use(express.static(publicDirectoryPath));
 
 app.use(json());
 
