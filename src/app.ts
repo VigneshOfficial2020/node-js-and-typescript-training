@@ -2,8 +2,18 @@ import express, { Request, Response, NextFunction } from "express";
 import todoRoutes from "./routes/todos";
 import { json } from "body-parser";
 const path = require("path");
+import mongoose from "mongoose";
 
 const app = express();
+
+mongoose
+  .connect("mongodb://localhost/Gembrill")
+  .then(() => {
+    console.log("mongodb is connected to Gembrill");
+  })
+  .catch(() => {
+    console.log("connection failed");
+  });
 
 const publicDirectoryPath = path.join(__dirname, "../public");
 app.use(express.static(publicDirectoryPath));

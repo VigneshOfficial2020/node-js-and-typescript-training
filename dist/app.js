@@ -7,7 +7,16 @@ const express_1 = __importDefault(require("express"));
 const todos_1 = __importDefault(require("./routes/todos"));
 const body_parser_1 = require("body-parser");
 const path = require("path");
+const mongoose_1 = __importDefault(require("mongoose"));
 const app = express_1.default();
+mongoose_1.default
+    .connect("mongodb://localhost/Gembrill")
+    .then(() => {
+    console.log("mongodb is connected to Gembrill");
+})
+    .catch(() => {
+    console.log("connection failed");
+});
 const publicDirectoryPath = path.join(__dirname, "../public");
 app.use(express_1.default.static(publicDirectoryPath));
 app.use(body_parser_1.json());

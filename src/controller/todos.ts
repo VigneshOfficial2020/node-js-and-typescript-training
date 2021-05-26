@@ -23,6 +23,7 @@ export const createTodo: RequestHandler = (req, res, next) => {
 };
 
 export const getTodos: RequestHandler = (req, res, next) => {
+  logger.info("Inside getTodos API");
   res.status(200).json({ todos: TODOS });
 };
 

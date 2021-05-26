@@ -27,6 +27,7 @@ const createTodo = (req, res, next) => {
 };
 exports.createTodo = createTodo;
 const getTodos = (req, res, next) => {
+    logger.info("Inside getTodos API");
     res.status(200).json({ todos: TODOS });
 };
 exports.getTodos = getTodos;
