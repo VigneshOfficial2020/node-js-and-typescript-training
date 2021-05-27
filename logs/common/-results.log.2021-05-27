@@ -6,3 +6,5 @@
 {"message":"Inside getTodos API","level":"info"}
 {"message":"Inside getTodos API","level":"info"}
 {"message":"Inside getTodos API","level":"info"}
+{"message":"Inside deleteTodo API","level":"info"}
+{"message":"Inside createTodo API data =[object Promise]","level":"info"}

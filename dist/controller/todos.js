@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateTodo = exports.getTodos = exports.createTodo = void 0;
+exports.deleteTodo = exports.updateTodo = exports.getTodos = exports.createTodo = void 0;
 const todos_1 = __importDefault(require("../models/todos"));
 const logger = require("../logger");
 const createTodo = async (req, res, next) => {
@@ -54,3 +54,22 @@ const updateTodo = async (req, res, next) => {
     }
 };
 exports.updateTodo = updateTodo;
+const deleteTodo = async (req, res, next) => {
+    logger.info("Inside deleteTodo API");
+    try {
+        const id = req.params.id;
+        console.log("params", id);
+        const filter = { _id: id };
+        let existingData = await todos_1.default.findOneAndDelete(filter);
+        res.status(200).json({
+            message: "updated Successfully",
+            result: existingData,
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            message: "Internal server error while deleting.Please contact admin",
+        });
+    }
+};
+exports.deleteTodo = deleteTodo;
