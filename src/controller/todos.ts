@@ -2,16 +2,15 @@ import { RequestHandler } from "express";
 import Todo from "../models/todos";
 const logger = require("../logger");
 
-const TODOS: Todo[] = [];
-
-export const createTodo: RequestHandler = (req, res, next) => {
+export const createTodo: RequestHandler = async (req, res, next) => {
   try {
-    logger.info("Inside createTodo API");
     const text = req.body.text;
-    const newTodo = new Todo(Math.random().toString(), text);
-    TODOS.push(newTodo);
+    const newTodo = new Todo({ text });
+    const data = newTodo.save();
+    logger.info("Inside createTodo API data =" + data);
     res.status(201).json({
       message: "Successfully created",
+      data: data,
       result: 1,
     });
   } catch (err) {
@@ -22,30 +21,25 @@ export const createTodo: RequestHandler = (req, res, next) => {
   }
 };
 
-export const getTodos: RequestHandler = (req, res, next) => {
+export const getTodos: RequestHandler = async (req, res, next) => {
   logger.info("Inside getTodos API");
-  res.status(200).json({ todos: TODOS });
+  const data = await Todo.find();
+  res.status(200).json({ todos: data });
 };
 
-export const updateTodo: RequestHandler = (req, res, next) => {
+export const updateTodo: RequestHandler = async (req, res, next) => {
   try {
     const id = req.params.id;
     console.log("params", id);
     const text = req.body.text;
-    let existingData = TODOS.findIndex((obj) => obj.id === id);
-    if (existingData == -1) {
-      res.status(404).json({
-        message: "Data Not Found",
-      });
-    }
-
-    console.log(existingData);
-
-    TODOS[existingData].text = text;
-
+    const filter = { _id: id };
+    const update = { text: text };
+    let existingData = await Todo.findOneAndUpdate(filter, update, {
+      new: true,
+    });
     res.status(200).json({
       message: "updated Successfully",
-      result: 1,
+      result: existingData,
     });
   } catch (err) {
     res.status(500).json({

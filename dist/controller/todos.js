@@ -6,15 +6,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateTodo = exports.getTodos = exports.createTodo = void 0;
 const todos_1 = __importDefault(require("../models/todos"));
 const logger = require("../logger");
-const TODOS = [];
-const createTodo = (req, res, next) => {
+const createTodo = async (req, res, next) => {
     try {
-        logger.info("Inside createTodo API");
         const text = req.body.text;
-        const newTodo = new todos_1.default(Math.random().toString(), text);
-        TODOS.push(newTodo);
+        const newTodo = new todos_1.default({ text });
+        const data = newTodo.save();
+        logger.info("Inside createTodo API data =" + data);
         res.status(201).json({
             message: "Successfully created",
+            data: data,
             result: 1,
         });
     }
@@ -26,27 +26,25 @@ const createTodo = (req, res, next) => {
     }
 };
 exports.createTodo = createTodo;
-const getTodos = (req, res, next) => {
+const getTodos = async (req, res, next) => {
     logger.info("Inside getTodos API");
-    res.status(200).json({ todos: TODOS });
+    const data = await todos_1.default.find();
+    res.status(200).json({ todos: data });
 };
 exports.getTodos = getTodos;
-const updateTodo = (req, res, next) => {
+const updateTodo = async (req, res, next) => {
     try {
         const id = req.params.id;
         console.log("params", id);
         const text = req.body.text;
-        let existingData = TODOS.findIndex((obj) => obj.id === id);
-        if (existingData == -1) {
-            res.status(404).json({
-                message: "Data Not Found",
-            });
-        }
-        console.log(existingData);
-        TODOS[existingData].text = text;
+        const filter = { _id: id };
+        const update = { text: text };
+        let existingData = await todos_1.default.findOneAndUpdate(filter, update, {
+            new: true,
+        });
         res.status(200).json({
             message: "updated Successfully",
-            result: 1,
+            result: existingData,
         });
     }
     catch (err) {

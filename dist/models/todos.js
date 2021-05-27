@@ -22,7 +22,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TodoSchema = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
 exports.TodoSchema = new mongoose_1.Schema({
-    id: { type: String, required: true },
     text: { type: String, required: true },
 });
 exports.default = mongoose_1.default.model("TodoSchema", exports.TodoSchema);
