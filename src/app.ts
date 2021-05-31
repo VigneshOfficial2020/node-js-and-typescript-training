@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import todoRoutes from "./routes/todos";
+import authRoutes from "./routes/auth";
 import { json } from "body-parser";
 const path = require("path");
 import mongoose from "mongoose";
@@ -35,3 +36,5 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 app.use("/todos", todoRoutes);
+
+app.use("/auth/", authRoutes);

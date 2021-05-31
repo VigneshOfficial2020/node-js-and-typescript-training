@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const todos_1 = __importDefault(require("./routes/todos"));
+const auth_1 = __importDefault(require("./routes/auth"));
 const body_parser_1 = require("body-parser");
 const path = require("path");
 const mongoose_1 = __importDefault(require("mongoose"));
@@ -32,3 +33,4 @@ app.use((req, res, next) => {
     next();
 });
 app.use("/todos", todos_1.default);
+app.use("/auth/", auth_1.default);
