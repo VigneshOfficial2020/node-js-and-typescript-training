@@ -5,12 +5,13 @@ import {
   updateTodo,
   deleteTodo,
 } from "../controller/todos";
+import { auth } from "../middleware/auth";
 
 const router = Router();
 
-router.post("/", createTodo);
-router.get("/", getTodos);
-router.patch("/:id", updateTodo);
-router.delete("/:id", deleteTodo);
+router.post("/", [auth, createTodo]);
+router.get("/", [auth, getTodos]);
+router.patch("/:id", [auth, updateTodo]);
+router.delete("/:id", [auth, deleteTodo]);
 
 export default router;
