@@ -32,5 +32,11 @@ app.use((req, res, next) => {
     console.log("This is second default execution");
     next();
 });
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,Authorization");
+    res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELTE,PATCH");
+    next();
+});
 app.use("/todos", todos_1.default);
 app.use("/auth/", auth_1.default);
